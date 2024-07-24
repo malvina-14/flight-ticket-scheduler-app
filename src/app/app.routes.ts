@@ -16,4 +16,11 @@ export const routes: Routes = [
         m => m.SignupComponent
       ),
   },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./pages/features/main/main.component').then(
+        (m) => m.MainComponent
+      ),
+  },
 ];
