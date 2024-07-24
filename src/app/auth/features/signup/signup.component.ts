@@ -1,8 +1,17 @@
 import {Component} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from "@angular/forms";
 import {Router, RouterLink} from "@angular/router";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-signup',
@@ -22,8 +31,11 @@ export class SignupComponent {
 
   constructor(
     private fb: FormBuilder,
+    private authService: AuthService,
     private snackBar: MatSnackBar,
     private router: Router
+
+
   ) {
     this.signUpForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
@@ -33,31 +45,31 @@ export class SignupComponent {
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).+$')
       ]],
       confirmPassword: ['', Validators.required]
-    }, {validator: this.passwordMatchValidator});
+    }, {validators: this.passwordMatchValidator});
   }
 
-  passwordMatchValidator(formGroup: FormGroup) {
-    return formGroup.get('password')?.value === formGroup.get('confirmPassword')?.value ? null : {mismatch: true};
-  }
+  passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : {mismatch: true};
+  };
 
   signUp(): void {
     if (this.signUpForm.valid) {
+      const email = this.signUpForm.get('email')?.value;
+      const password = this.signUpForm.get('password')?.value;
 
-      this.showSnackbar('Sign up successful!');
-      this.router.navigate(['/login']);
-    } else {
-
-      this.showSnackbar('Sign up  failed. Please try again.');
+      this.authService.signUp(email, password)
+        .then(() => {
+          this.snackBar.open('Sign up successful!');
+          this.router.navigate(['/login']);
+        })
+        .catch((error: any) => {
+          console.error('Sign up  failed', error);
+          this.snackBar.open('Sign up  failed. Please try again.');
+        });
     }
   }
-
-  private showSnackbar(message: string): void {
-    const config = new MatSnackBarConfig();
-    config.verticalPosition = 'top';
-    config.horizontalPosition = 'center';
-    this.snackBar.open(message, 'X', config);
-  }
-
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;

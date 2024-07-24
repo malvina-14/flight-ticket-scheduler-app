@@ -51,7 +51,6 @@ export class LoginComponent {
         .then(() => {
           this.snackBar.open('Your are logged in successfully!', '', )
           const user = this.authService.getUser()
-          debugger
           this.snackBar.open('Login successful!');
           this.router.navigate(['flight-ticket-list']);
         })

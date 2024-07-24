@@ -31,11 +31,9 @@ export class AuthService {
         this.user = userRef.data() as User;
         this.user = {...this.user, id: res?.user?.uid};
         console.log(this.user);
-        debugger
         localStorage.setItem('user', JSON.stringify(this.user));
       });
 
-      debugger
       return true;
     } catch (error) {
       console.error("Error during login:", error);
