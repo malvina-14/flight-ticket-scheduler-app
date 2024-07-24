@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
 export const routes: Routes = [
 
@@ -22,5 +22,14 @@ export const routes: Routes = [
       import('./pages/features/main/main.component').then(
         (m) => m.MainComponent
       ),
+    children: [
+      {
+        path: 'flight-ticket-list',
+        loadComponent: () =>
+          import(
+            './pages/features/fight-ticket-list/fight-ticket-list.component'
+            ).then((m) => m.FightTicketListComponent),
+      },
+    ],
   },
 ];
