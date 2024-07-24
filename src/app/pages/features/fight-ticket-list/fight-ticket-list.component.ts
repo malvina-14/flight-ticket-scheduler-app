@@ -6,6 +6,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Ticket} from "../../interfaces/flight-ticket.interface";
 import {FlightTicketAddModalComponent} from "../flight-ticket-add-modal/flight-ticket-add-modal.component";
 import {MatDialog} from "@angular/material/dialog";
+import {FlightTicketViewModalComponent} from "../flight-ticket-view-modal/flight-ticket-view-modal.component";
 
 @Component({
   selector: 'app-fight-ticket-list',
@@ -211,4 +212,13 @@ export class FightTicketListComponent implements OnInit {
       }
     });
   }
+
+  viewTicket(ticket: any) {
+    console.log('ticket', ticket)
+    this.dialog.open(FlightTicketViewModalComponent, {
+      width: '600px',
+      data: {ticket},
+    });
+  }
+
 }
