@@ -1,0 +1,45 @@
+<div class="add-ticket-modal">
+    <button mat-icon-button class="close-button" (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <h2 mat-dialog-title>Add New Ticket</h2>
+    <mat-dialog-content>
+        <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="ticket_type_id">Ticket ID</label>
+                <input id="ticket_type_id" class="form-control" formControlName="ticket_type_id" required />
+            </div>
+            <div class="form-group">
+                <label for="inbound">From</label>
+                <input id="inbound" class="form-control" formControlName="inbound" required />
+            </div>
+            <div class="form-group">
+                <label for="outbound">To</label>
+                <input id="outbound" class="form-control" formControlName="outbound" required />
+            </div>
+            <div class="form-group">
+                <label for="ticket_type">Type</label>
+                <input id="ticket_type" class="form-control" formControlName="ticket_type" required />
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input id="price" type="number" class="form-control" formControlName="price" required />
+            </div>
+            <div class="form-group">
+                <label for="seat_number">Seat Number</label>
+                <input id="seat_number" class="form-control" formControlName="seat_number" required />
+            </div>
+            <div class="form-group">
+                <label for="from_date">From Date</label>
+                <input id="from_date" type="date" class="form-control" formControlName="from_date" required />
+            </div>
+            <div class="form-group">
+                <label for="to_date">To Date</label>
+                <input id="to_date" type="date" class="form-control" formControlName="to_date" required />
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" [disabled]="ticketForm.invalid">Submit</button>
+            </div>
+        </form>
+    </mat-dialog-content>
+</div>

@@ -1,0 +1,26 @@
+.add-ticket-modal {
+  position: relative;
+  padding: 1rem;
+}
+
+.close-button {
+  position: absolute;
+  top: 1.2rem;
+  right: 0.5rem;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+.btn-primary{
+  background-color: #0076CE;
+  border: 1px solid #0076CE;
+  text-transform: none;
+}

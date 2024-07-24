@@ -4,6 +4,8 @@ import {RouterLink, RouterOutlet} from "@angular/router";
 import {MdbCheckboxModule} from "mdb-angular-ui-kit/checkbox";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Ticket} from "../../interfaces/flight-ticket.interface";
+import {FlightTicketAddModalComponent} from "../flight-ticket-add-modal/flight-ticket-add-modal.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-fight-ticket-list',
@@ -191,12 +193,22 @@ export class FightTicketListComponent implements OnInit {
   ];
 
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
 
   }
 
+  addTicket(): void {
+    const dialogRef = this.dialog.open(FlightTicketAddModalComponent, {
+      width: '600px'
+    });
 
+    dialogRef.afterClosed().subscribe((result: Ticket) => {
+      if (result) {
+        this.tickets.push(result);
+      }
+    });
+  }
 }
