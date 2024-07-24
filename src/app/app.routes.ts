@@ -1,26 +1,30 @@
 import {Routes} from '@angular/router';
 
 export const routes: Routes = [
-
+  {
+    path: '',
+    redirectTo: 'flight-ticket-list',
+    pathMatch: 'full',
+  },
   {
     path: 'login',
     loadComponent: () =>
       import('./auth/features/login/login.component').then(
-        m => m.LoginComponent
+        c => c.LoginComponent
       ),
   },
   {
     path: 'sign-up',
     loadComponent: () =>
       import('./auth/features/signup/signup.component').then(
-        m => m.SignupComponent
+        c => c.SignupComponent
       ),
   },
   {
     path: '',
     loadComponent: () =>
       import('./pages/features/main/main.component').then(
-        (m) => m.MainComponent
+        (c) => c.MainComponent
       ),
     children: [
       {
@@ -28,8 +32,12 @@ export const routes: Routes = [
         loadComponent: () =>
           import(
             './pages/features/fight-ticket-list/fight-ticket-list.component'
-            ).then((m) => m.FightTicketListComponent),
+            ).then((c) => c.FightTicketListComponent),
       },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: 'flight-ticket-list',
   },
 ];

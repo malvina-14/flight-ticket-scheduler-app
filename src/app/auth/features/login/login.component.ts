@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import { RouterLink, RouterOutlet} from "@angular/router";
+import {Router, RouterLink, RouterOutlet} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
-import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {MdbCheckboxModule} from "mdb-angular-ui-kit/checkbox";
+import {AuthService} from "../../services/auth.service";
 
 
 @Component({
@@ -25,7 +26,10 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
+    private authService: AuthService,
     private snackBar: MatSnackBar,
+    private router: Router
+
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -37,20 +41,25 @@ export class LoginComponent {
     });
   }
 
+
   login() {
     if (this.loginForm.valid) {
-      this.showSnackbar('Login succeeded!')
-    } else {
-      this.showSnackbar('Login failed. Please try again.');
+      const email = this.loginForm.get('email')?.value;
+      const password = this.loginForm.get('password')?.value;
+
+      this.authService.login(email, password)
+        .then(() => {
+          this.snackBar.open('Your are logged in successfully!', '', )
+          const user = this.authService.getUser()
+          debugger
+          this.snackBar.open('Login successful!');
+          this.router.navigate(['flight-ticket-list']);
+        })
+        .catch((error: any) => {
+          console.error('Login failed', error);
+          this.snackBar.open('Login failed. Please try again.');
+        });
     }
-
-  }
-
-  private showSnackbar(message: string): void {
-    const config = new MatSnackBarConfig();
-    config.verticalPosition = 'top';
-    config.horizontalPosition = 'center';
-    this.snackBar.open(message, 'X', config);
   }
 
   togglePasswordVisibility(): void {
