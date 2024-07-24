@@ -1,0 +1,50 @@
+.gradient-custom-2 {
+  background: #fccb90;
+  background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+  background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+}
+
+.toast-top-center {
+  top: 20px;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.toast-top-center {
+  top: 12px;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  z-index: 9999;
+}
+
+.text-danger {
+  font-size: 12px;
+}
+
+.form-control {
+  border: 1px solid #0d6efd;
+
+}
+
+.password-eye {
+  position: absolute;
+  right: 10px;
+  top: 49%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .gradient-form {
+    height: 100vh !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+  }
+}
