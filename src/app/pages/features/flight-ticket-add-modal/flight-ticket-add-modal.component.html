@@ -9,27 +9,24 @@
       <div class="form-group">
         <label for="inbound">From</label>
         <select id="inbound" class="form-control" formControlName="inbound" required>
-          <option value=""></option>
           <option *ngFor="let airport of airports" [value]="airport.code">{{ airport.name }}</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="inbound">To</label>
-        <select id="outbound" class="form-control" formControlName="outbound" required>
-          <option value=""></option>
+        <label for="outbound">To</label>
+        <select id="outbound" class="form-control" formControlName="outbound" required (change)="onAirportChange($event)">
           <option *ngFor="let airport of airports" [value]="airport.code">{{ airport.name }}</option>
         </select>
       </div>
       <div class="form-group">
         <label for="ticket_type">Type</label>
-        <select id="ticket_type" class="form-control" formControlName="ticket_type" required>
-          <option value=""></option>
+        <select id="ticket_type" class="form-control" formControlName="ticket_type" required (change)="onTicketTypeChange($event)">
           <option *ngFor="let type of ticketTypes" [value]="type">{{ type }}</option>
         </select>
       </div>
       <div class="form-group">
         <label for="price">Price</label>
-        <input id="price" type="number" class="form-control" formControlName="price" required/>
+        <input id="price" type="number" class="form-control" formControlName="price" required readOnly/>
       </div>
       <div class="form-group">
         <label for="seat_number">Seat Number</label>

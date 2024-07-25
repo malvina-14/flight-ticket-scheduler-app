@@ -29,6 +29,7 @@ import {Ticket} from "../../interfaces/flight-ticket.interface";
 })
 export class FlightTicketAddModalComponent {
   ticketTypes: string[] = ['Economy', 'Business', 'First Class'];
+  initialEconomyPrice: number | undefined;
   airports: { code: string, name: string }[] = [
     {code: 'JFK', name: 'John F. Kennedy International Airport'},
     {code: 'LAX', name: 'Los Angeles International Airport'},
@@ -50,10 +51,11 @@ export class FlightTicketAddModalComponent {
     private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+
     this.ticketForm = this.fb.group({
       inbound: ['', Validators.required],
       outbound: ['', Validators.required],
-      ticket_type: ['', Validators.required],
+      ticket_type: ['Economy', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
       seat_number: ['', Validators.required],
       from_date: ['', Validators.required],
@@ -63,6 +65,26 @@ export class FlightTicketAddModalComponent {
 
   close(): void {
     this.dialogRef.close();
+  }
+
+  onAirportChange(event: Event): void {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    console.log('Selected airport code:', selectedValue);
+    this.initialEconomyPrice = Math.floor(Math.random() * 51) + 50 // Generates a random price between 50 and 100
+    this.ticketForm.patchValue({
+      price: this.initialEconomyPrice
+    });
+  }
+
+  onTicketTypeChange(event: Event): void {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    console.log('Selected ticket type:', selectedValue);
+    let newPrice = this.initialEconomyPrice;
+    if (selectedValue === 'Business') newPrice = this.initialEconomyPrice as number * 1.2;
+    if (selectedValue === 'First Class') newPrice = this.initialEconomyPrice as number * 1.5;
+    this.ticketForm.patchValue({
+      price: newPrice
+    });
   }
 
   onSubmit(): void {
