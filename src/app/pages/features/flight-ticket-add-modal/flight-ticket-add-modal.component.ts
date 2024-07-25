@@ -3,12 +3,13 @@ import {MAT_DIALOG_DATA, MatDialogContent, MatDialogRef, MatDialogTitle} from "@
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import EventEmitter from "events";
 import {TicketService} from "../../services/ticket.service";
+import ShortUniqueId from 'short-uuid';
 import {NgForOf} from "@angular/common";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {catchError} from "rxjs/operators";
+import {of} from "rxjs";
 import {Ticket} from "../../interfaces/flight-ticket.interface";
-import ShortUniqueId from 'short-uuid';
 
 
 @Component({
@@ -21,6 +22,7 @@ import ShortUniqueId from 'short-uuid';
     ReactiveFormsModule,
     MatDialogContent,
     NgForOf
+
   ],
   templateUrl: './flight-ticket-add-modal.component.html',
   styleUrl: './flight-ticket-add-modal.component.scss'
@@ -28,16 +30,16 @@ import ShortUniqueId from 'short-uuid';
 export class FlightTicketAddModalComponent {
   ticketTypes: string[] = ['Economy', 'Business', 'First Class'];
   airports: { code: string, name: string }[] = [
-    { code: 'JFK', name: 'John F. Kennedy International Airport' },
-    { code: 'LAX', name: 'Los Angeles International Airport' },
-    { code: 'ORD', name: "O'Hare International Airport" },
-    { code: 'DFW', name: 'Dallas/Fort Worth International Airport' },
-    { code: 'DEN', name: 'Denver International Airport' },
-    { code: 'SFO', name: 'San Francisco International Airport' },
-    { code: 'ATL', name: 'Hartsfield-Jackson Atlanta International Airport' },
-    { code: 'MIA', name: 'Miami International Airport' },
-    { code: 'SEA', name: 'Seattle-Tacoma International Airport' },
-    { code: 'LAS', name: 'McCarran International Airport' }
+    {code: 'JFK', name: 'John F. Kennedy International Airport'},
+    {code: 'LAX', name: 'Los Angeles International Airport'},
+    {code: 'ORD', name: "O'Hare International Airport"},
+    {code: 'DFW', name: 'Dallas/Fort Worth International Airport'},
+    {code: 'DEN', name: 'Denver International Airport'},
+    {code: 'SFO', name: 'San Francisco International Airport'},
+    {code: 'ATL', name: 'Hartsfield-Jackson Atlanta International Airport'},
+    {code: 'MIA', name: 'Miami International Airport'},
+    {code: 'SEA', name: 'Seattle-Tacoma International Airport'},
+    {code: 'LAS', name: 'McCarran International Airport'}
   ];
   ticketForm: FormGroup;
 
@@ -68,19 +70,25 @@ export class FlightTicketAddModalComponent {
       const newTicket: Ticket = this.ticketForm.value;
       newTicket.id = ShortUniqueId().generate();
       newTicket.ticket_type_id = `${newTicket.id}_${newTicket.ticket_type}`;
-      this.ticketService.add(newTicket).then(() => {
-        this.snackBar.open('Ticket created successfully!', '', {
-          duration: 2000,
-          panelClass:  ['success-snackbar'],
-          verticalPosition: 'top'
-        });
-        this.ticketForm.reset();
-      }).catch((error: any) => {
-        this.snackBar.open('Duplicate ticket exists!', '', {
-          duration: 2000,
-          panelClass:  ['error-snackbar'],
-          verticalPosition: 'top'
-        });
+
+      this.ticketService.add(newTicket).pipe(
+        catchError(error => {
+          this.snackBar.open('This ticket is duplicated!', '', {
+            duration: 2000,
+            panelClass: ['error-snackbar'],
+            verticalPosition: 'top'
+          });
+          return of(null);
+        })
+      ).subscribe(result => {
+        if (result !== null) {
+          this.snackBar.open('Ticket created successfully!', '', {
+            duration: 2000,
+            panelClass: ['success-snackbar'],
+            verticalPosition: 'top'
+          });
+          this.ticketForm.reset();
+        }
       });
     }
   }
