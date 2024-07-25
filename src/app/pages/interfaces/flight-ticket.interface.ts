@@ -1,6 +1,6 @@
 // ticket.model.ts
 export interface Ticket {
-    id: number;
+    id: string;
     inbound: string;
     outbound: string;
     ticket_type: string;
