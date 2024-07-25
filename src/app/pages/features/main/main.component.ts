@@ -18,14 +18,12 @@ export class MainComponent {
   ) {
   }
 
-
   logout() {
     this.authService.logout()
-
   }
 
   navigateToChart() {
-
+    this.router.navigate(['/chart-data'])
   }
 
   navigateHome() {

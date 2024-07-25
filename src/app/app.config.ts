@@ -10,6 +10,7 @@ import {getStorage, provideStorage} from "@angular/fire/storage";
 import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import {getAuth, provideAuth} from "@angular/fire/auth";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 
 
@@ -24,7 +25,7 @@ export const appConfig: ApplicationConfig = {
 
       provideFirestore(()=> getFirestore()),
       provideStorage(()=> getStorage())
-    )
+    ), provideCharts(withDefaultRegisterables())
 
   ]
 };

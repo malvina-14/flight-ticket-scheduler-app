@@ -37,6 +37,15 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
 
       },
+      {
+        path: 'chart-data',
+        loadComponent: () =>
+          import(
+            './pages/features/chart-data/chart-data.component'
+            ).then((m) => m.ChartDataComponent),
+
+
+      },
     ],
   },
   {
