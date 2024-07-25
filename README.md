@@ -1,8 +1,8 @@
 FlightTicketSchedulerApp,
-This project was generated with Angular CLI version 17.3.8.
+  This project was generated with Angular CLI version 17.3.8.
 
-Description
-The Flight Ticket Scheduler App is an Angular application designed to manage and schedule flight tickets efficiently. It features role-based access, allowing both admin and user roles to interact with the system, view flight tickets, and access various functionalities. Admin users have additional privileges to add new tickets.
+Description:
+- The Flight Ticket Scheduler App is an Angular application designed to manage and schedule flight tickets efficiently. It features role-based access, allowing both admin and user roles to interact with the system, view flight tickets, and access various functionalities. Admin users have additional privileges to add new tickets.
 
 Features:
   1. Role-based access (Admin and User)
