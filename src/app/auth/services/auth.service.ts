@@ -21,7 +21,6 @@ export class AuthService {
       role: isAdmin ? 'admin' : 'user'
     });
   }
-
   async login(email: string, password: string) {
     try {
       const res = await this.afAuth.signInWithEmailAndPassword(email, password);
@@ -29,11 +28,13 @@ export class AuthService {
 
       snapshot.forEach(userRef => {
         this.user = userRef.data() as User;
-        this.user = {...this.user, id: res?.user?.uid};
+        this.user = { ...this.user, id: res?.user?.uid };
         console.log(this.user);
+        debugger
         localStorage.setItem('user', JSON.stringify(this.user));
       });
 
+      debugger
       return true;
     } catch (error) {
       console.error("Error during login:", error);
