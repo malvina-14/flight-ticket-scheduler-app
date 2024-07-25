@@ -26,6 +26,9 @@ ng serve
 5. Navigate to http://localhost:4200/. The application will automatically reload if you change any of the source files.
 
 
+Flow:
+<img src="src/flow.jpg" alt="Flow of App" width="800">
+
 Usage:
 - Login
    - Users can log in as either an admin or a user.
