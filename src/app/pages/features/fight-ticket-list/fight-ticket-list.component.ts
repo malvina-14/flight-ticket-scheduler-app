@@ -7,6 +7,7 @@ import {Ticket} from "../../interfaces/flight-ticket.interface";
 import {FlightTicketAddModalComponent} from "../flight-ticket-add-modal/flight-ticket-add-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 import {FlightTicketViewModalComponent} from "../flight-ticket-view-modal/flight-ticket-view-modal.component";
+import {AuthService} from "../../../auth/services/auth.service";
 
 @Component({
   selector: 'app-fight-ticket-list',
@@ -24,6 +25,7 @@ import {FlightTicketViewModalComponent} from "../flight-ticket-view-modal/flight
   styleUrl: './fight-ticket-list.component.scss'
 })
 export class FightTicketListComponent implements OnInit {
+  userRole: string = 'user';
 
   tickets: Ticket[] = [
     {
@@ -194,10 +196,16 @@ export class FightTicketListComponent implements OnInit {
   ];
 
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    const user = this.authService.getUser()
+    if (Object.keys(user).length) {
+      this.userRole = user.role;
+    } else {
+      this.authService.logout()
+    }
 
   }
 
