@@ -1,42 +1,42 @@
 <div class="ticket-detail-modal">
-    <button mat-icon-button class="close-button" (click)="close()">
-        <mat-icon>close</mat-icon>
-    </button>
-    <h2 mat-dialog-title>Ticket Details</h2>
-    <mat-dialog-content>
-        <div class="ticket-detail">
-            <div class="ticket-detail-row">
-                <span class="ticket-detail-label"><strong>Ticket ID:</strong></span>
-                <span class="ticket-detail-value">{{ data.ticket.ticket_type_id }}</span>
-            </div>
-            <div class="ticket-detail-row">
-                <span class="ticket-detail-label"><strong>From:</strong></span>
-                <span class="ticket-detail-value">{{ data.ticket.inbound }}</span>
-            </div>
-            <div class="ticket-detail-row">
-                <span class="ticket-detail-label"><strong>To:</strong></span>
-                <span class="ticket-detail-value">{{ data.ticket.outbound }}</span>
-            </div>
-            <div class="ticket-detail-row">
-                <span class="ticket-detail-label"><strong>Type:</strong></span>
-                <span class="ticket-detail-value">{{ data.ticket.ticket_type }}</span>
-            </div>
-            <div class="ticket-detail-row">
-                <span class="ticket-detail-label"><strong>Price:</strong></span>
-                <span class="ticket-detail-value">${{ data.ticket.price }}</span>
-            </div>
-            <div class="ticket-detail-row">
-                <span class="ticket-detail-label"><strong>Seat Number:</strong></span>
-                <span class="ticket-detail-value">{{ data.ticket.seat_number }}</span>
-            </div>
-            <div class="ticket-detail-row">
-                <span class="ticket-detail-label"><strong>From Date:</strong></span>
-                <span class="ticket-detail-value">{{ data.ticket.from_date | date }}</span>
-            </div>
-            <div class="ticket-detail-row">
-                <span class="ticket-detail-label"><strong>To Date:</strong></span>
-                <span class="ticket-detail-value">{{ data.ticket.to_date | date }}</span>
-            </div>
-        </div>
-    </mat-dialog-content>
+  <button mat-icon-button class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <h2 mat-dialog-title>Ticket Details</h2>
+  <mat-dialog-content>
+    <div class="ticket-detail">
+      <div class="ticket-detail-row">
+        <span class="ticket-detail-label"><strong>Ticket ID:</strong></span>
+        <span class="ticket-detail-value">{{ data.ticket.ticket_type_id }}</span>
+      </div>
+      <div class="ticket-detail-row">
+        <span class="ticket-detail-label"><strong>From:</strong></span>
+        <span class="ticket-detail-value">{{ data.ticket.inbound }}</span>
+      </div>
+      <div class="ticket-detail-row">
+        <span class="ticket-detail-label"><strong>To:</strong></span>
+        <span class="ticket-detail-value">{{ data.ticket.outbound }}</span>
+      </div>
+      <div class="ticket-detail-row">
+        <span class="ticket-detail-label"><strong>Type:</strong></span>
+        <span class="ticket-detail-value">{{ data.ticket.ticket_type }}</span>
+      </div>
+      <div class="ticket-detail-row">
+        <span class="ticket-detail-label"><strong>Price:</strong></span>
+        <span class="ticket-detail-value">${{ data.ticket.price }}</span>
+      </div>
+      <div class="ticket-detail-row">
+        <span class="ticket-detail-label"><strong>Seat Number:</strong></span>
+        <span class="ticket-detail-value">{{ data.ticket.seat_number }}</span>
+      </div>
+      <div class="ticket-detail-row">
+        <span class="ticket-detail-label"><strong>From Date:</strong></span>
+        <span class="ticket-detail-value">{{ data.ticket.from_date | date:'medium' }}</span>
+      </div>
+      <div class="ticket-detail-row">
+        <span class="ticket-detail-label"><strong>To Date:</strong></span>
+        <span class="ticket-detail-value">{{ data.ticket.to_date | date:'medium' }}</span>
+      </div>
+    </div>
+  </mat-dialog-content>
 </div>
