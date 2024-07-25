@@ -2,7 +2,10 @@
   <div class="container-fluid d-flex justify-content-between align-items-center">
     <a class="navbar-brand text-white">Flight Ticket Scheduler</a>
     <div class="d-flex align-items-center">
-      <i class="fa fa-sign-out-alt text-white" (click)="logout()" ></i>
+      <i class="fa fa-home text-white me-5" (click)="navigateHome()" style="cursor: pointer;"></i>
+
+      <i class="fa fa-chart-line text-white me-5" (click)="navigateToChart()" style="cursor: pointer;"></i>
+      <i class="fa fa-sign-out-alt text-white" (click)="logout()" style="cursor: pointer;"></i>
     </div>
   </div>
 </nav>

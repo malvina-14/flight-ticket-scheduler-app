@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterOutlet} from "@angular/router";
+import {Router, RouterOutlet} from "@angular/router";
 import {AuthService} from "../../../auth/services/auth.service";
 
 @Component({
@@ -14,11 +14,22 @@ import {AuthService} from "../../../auth/services/auth.service";
 export class MainComponent {
   constructor(
     private authService: AuthService,
+    private router: Router
   ) {
   }
 
+
   logout() {
     this.authService.logout()
+
+  }
+
+  navigateToChart() {
+
+  }
+
+  navigateHome() {
+    this.router.navigate(['/flight-ticket-list'])
 
   }
 }
