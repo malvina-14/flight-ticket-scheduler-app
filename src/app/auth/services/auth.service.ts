@@ -34,7 +34,6 @@ export class AuthService {
         localStorage.setItem('user', JSON.stringify(this.user));
       });
 
-      debugger
       return true;
     } catch (error) {
       console.error("Error during login:", error);
@@ -59,6 +58,9 @@ export class AuthService {
   }
 
   getUser(): User | any {
-    return JSON.parse(localStorage.getItem('user') as string)
+    if (typeof localStorage !== 'undefined') {
+      return JSON.parse(localStorage.getItem('user') as string)
+    }
+    return null;
   }
 }
