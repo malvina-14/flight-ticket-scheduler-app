@@ -1,4 +1,5 @@
 import {Routes} from '@angular/router';
+import {AuthGuard} from "./auth/guards/auth.guard";
 
 export const routes: Routes = [
   {
@@ -33,6 +34,8 @@ export const routes: Routes = [
           import(
             './pages/features/fight-ticket-list/fight-ticket-list.component'
             ).then((c) => c.FightTicketListComponent),
+        canActivate: [AuthGuard],
+
       },
     ],
   },
