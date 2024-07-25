@@ -90,8 +90,9 @@ export class FlightTicketAddModalComponent {
   onSubmit(): void {
     if (this.ticketForm.valid) {
       const newTicket: Ticket = this.ticketForm.value;
-      newTicket.id = ShortUniqueId().generate();
+      newTicket.id = (ShortUniqueId().generate()).slice(0,5);
       newTicket.ticket_type_id = `${newTicket.id}_${newTicket.ticket_type}`;
+      newTicket.created_at = new Date();
 
       this.ticketService.add(newTicket).pipe(
         catchError(error => {

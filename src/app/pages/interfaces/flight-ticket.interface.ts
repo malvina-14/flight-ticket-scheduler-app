@@ -8,4 +8,5 @@ export interface Ticket {
     from_date: Date;
     to_date: Date;
     seat_number: string;
+    created_at: Date;
 }

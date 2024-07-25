@@ -63,12 +63,18 @@ export class TicketService {
   }
 
   tickets(selectedType?: string): Observable<Ticket[]> {
-    let collectionRef = this.firestore.collection('tickets') as any;
+    let collectionRef: AngularFirestoreCollection<Ticket>;
+
     if (selectedType && selectedType !== "All") {
-      collectionRef = this.firestore.collection('tickets', ref =>
-        ref.where('ticket_type', '==', selectedType)
+      collectionRef = this.firestore.collection<Ticket>('tickets', ref =>
+        ref.where('ticket_type', '==', selectedType).orderBy('created_at', 'desc')
+      );
+    } else {
+      collectionRef = this.firestore.collection<Ticket>('tickets', ref =>
+        ref.orderBy('created_at', 'desc')
       );
     }
+
     return collectionRef.valueChanges();
   }
 }
