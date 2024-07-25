@@ -1,4 +1,3 @@
-// ticket.model.ts
 export interface Ticket {
     id: string;
     inbound: string;
