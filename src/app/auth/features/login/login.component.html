@@ -7,7 +7,7 @@
             <div class="col-lg-6">
               <div class="card-body p-md-5 mx-md-4">
                 <div class="text-center">
-                  <h3 class="mt-1 mb-5 pb-1">Login</h3>
+                  <h1 class="mt-1 mb-5 pb-1">Login</h1>
                 </div>
 
                 <form [formGroup]="loginForm" (ngSubmit)="login()">
@@ -25,9 +25,9 @@
                   <div class="form-outline mb-4" data-mdb-input-init>
                     <label class="form-label" for="form2Example22">Password</label>
                     <div class="position-relative">
-                    <input [type]="showPassword ? 'text' : 'password'" id="form2Example22" class="form-control" formControlName="password" />
-                    <i class="fa password-eye" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePasswordVisibility()"></i>
-                     </div>
+                      <input [type]="showPassword ? 'text' : 'password'" id="form2Example22" class="form-control" formControlName="password" />
+                      <i class="fa" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePasswordVisibility()" style="position: absolute; right: 10px; top: 43%; transform: translateY(-50%); cursor: pointer;"></i>
+                    </div>
                     <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
                       <div *ngIf="loginForm.get('password')?.errors?.['required']" class="text-danger">Password is required.</div>
                       <div *ngIf="loginForm.get('password')?.errors?.['pattern']" class="text-danger">Invalid password format.</div>

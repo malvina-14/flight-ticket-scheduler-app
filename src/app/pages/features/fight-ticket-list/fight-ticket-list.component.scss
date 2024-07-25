@@ -20,14 +20,12 @@
 .bg-primary{
   background: linear-gradient(to right,  #d8363a, #dd3675);
 }
-.btn-success{
+.btn-danger{
   background-color: white !important;
   border: 1px solid #d8363a !important;
   color: #d8363a;
   text-transform: none !important;
   font-weight: 500;
-  font-size: 16px;
-  --mdb-btn-box-shadow: none
 }
 .details{
   cursor: pointer;
