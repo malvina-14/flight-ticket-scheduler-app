@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterOutlet} from "@angular/router";
+import {MdbCheckboxModule} from "mdb-angular-ui-kit/checkbox";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MdbCheckboxModule} from "mdb-angular-ui-kit/checkbox";
 import {AuthService} from "../../services/auth.service";
-
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 @Component({
   selector: 'app-login',
@@ -16,11 +16,12 @@ import {AuthService} from "../../services/auth.service";
     MdbCheckboxModule,
     ReactiveFormsModule,
     RouterLink,
+    AngularFireAuthModule,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   showPassword: boolean = false;
 
@@ -29,7 +30,6 @@ export class LoginComponent {
     private authService: AuthService,
     private snackBar: MatSnackBar,
     private router: Router
-
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -41,6 +41,12 @@ export class LoginComponent {
     });
   }
 
+  ngOnInit() {
+    const isLoggin = this.authService.getUser()
+    if (isLoggin) {
+      this.router.navigate(['/flight-ticket-list'])
+    }
+  }
 
   login() {
     if (this.loginForm.valid) {
@@ -49,14 +55,20 @@ export class LoginComponent {
 
       this.authService.login(email, password)
         .then(() => {
-          this.snackBar.open('Your are logged in successfully!', '', )
+          this.snackBar.open('You are logged in successfully!', '', {
+            duration: 2000,
+            panelClass: ['success-snackbar'],
+            verticalPosition: 'top'
+          });
           const user = this.authService.getUser()
-          this.snackBar.open('Login successful!');
           this.router.navigate(['flight-ticket-list']);
         })
         .catch((error: any) => {
-          console.error('Login failed', error);
-          this.snackBar.open('Login failed. Please try again.');
+          this.snackBar.open('Login failed. Please try again.', '', {
+            duration: 2000,
+            panelClass: ['error-snackbar'],
+            verticalPosition: 'top'
+          });
         });
     }
   }

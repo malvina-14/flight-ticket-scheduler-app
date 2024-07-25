@@ -65,12 +65,24 @@ export class SignupComponent {
           this.router.navigate(['/login']);
         })
         .catch((error: any) => {
-          console.error('Sign up  failed', error);
-          this.snackBar.open('Sign up  failed. Please try again.');
+          let errorMessage = 'Sign up failed. Please try again.';
+          // Map Firebase error codes to user-friendly messages
+          if (error.code === 'auth/email-already-in-use') {
+            errorMessage = 'The email address is already in use by another account.';
+          } else if (error.code === 'auth/invalid-email') {
+            errorMessage = 'The email address is not valid.';
+          } else if (error.code === 'auth/weak-password') {
+            errorMessage = 'The password is too weak.';
+          }
+
+          this.snackBar.open(errorMessage, '', {
+            duration: 3000,
+            panelClass: ['error-snackbar'],
+            verticalPosition: 'top'
+          });
         });
     }
   }
-
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
