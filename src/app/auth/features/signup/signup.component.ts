@@ -44,15 +44,9 @@ export class SignupComponent {
         Validators.minLength(8),
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).+$')
       ]],
-      confirmPassword: ['', Validators.required]
-    }, {validators: this.passwordMatchValidator});
+    })
   }
 
-  passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
-    const password = group.get('password')?.value;
-    const confirmPassword = group.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : {mismatch: true};
-  };
 
   signUp(): void {
     if (this.signUpForm.valid) {
