@@ -74,7 +74,7 @@ export class SignupComponent {
           }
 
           this.snackBar.open(errorMessage, '', {
-            duration: 3000,
+            duration: 2000,
             panelClass: ['error-snackbar'],
             verticalPosition: 'top'
           });

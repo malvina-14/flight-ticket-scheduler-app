@@ -19,16 +19,16 @@ export class TicketService {
     return this.isDuplicated(ticket).pipe(
       switchMap(isDup => {
         if (isDup) {
-          this.snackBar.open('Error adding ticket: Duplicate ticket exists', 'Close', { duration: 3000 });
+          this.snackBar.open('Error adding ticket: Duplicate ticket exists', 'Close', { duration: 2000 });
           return throwError('Ticket already exists!');
         } else {
           return from(this.ticketsCollection.add(ticket)).pipe(
             map(() => {
-              this.snackBar.open('Ticket added successfully', 'Close', { duration: 3000 });
+              this.snackBar.open('Ticket added successfully', 'Close', { duration: 2000 });
             }),
             catchError(error => {
               console.error('Error adding ticket: ', error);
-              this.snackBar.open('Error adding ticket', 'Close', { duration: 3000 });
+              this.snackBar.open('Error adding ticket', 'Close', { duration: 2000 });
               return throwError(error);
             })
           );
