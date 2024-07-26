@@ -89,8 +89,6 @@ export class FlightTicketAddModalComponent {
 
 
   onAirportChange(event: Event): void {
-    const selectedValue = (event.target as HTMLSelectElement).value;
-    console.log('Selected airport code:', selectedValue);
     this.initialEconomyPrice = Math.floor(Math.random() * 51) + 50 // Generates a random price between 50 and 100
     this.ticketForm.patchValue({
       price: this.initialEconomyPrice
@@ -98,9 +96,9 @@ export class FlightTicketAddModalComponent {
   }
 
 
+
   onTicketTypeChange(event: Event): void {
     const selectedValue = (event.target as HTMLSelectElement).value;
-    console.log('Selected ticket type:', selectedValue);
     let newPrice = this.initialEconomyPrice;
     if (selectedValue === 'Business') newPrice = this.initialEconomyPrice as number * 1.2;
     if (selectedValue === 'First Class') newPrice = this.initialEconomyPrice as number * 1.5;
