@@ -1,11 +1,18 @@
-import {Component, Inject, Output} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogContent, MatDialogRef, MatDialogTitle} from "@angular/material/dialog";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from "@angular/forms";
 import {TicketService} from "../../services/ticket.service";
 import ShortUniqueId from 'short-uuid';
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {catchError} from "rxjs/operators";
 import {of} from "rxjs";
@@ -21,7 +28,8 @@ import {Ticket} from "../../interfaces/flight-ticket.interface";
     MatIconButton,
     ReactiveFormsModule,
     MatDialogContent,
-    NgForOf
+    NgForOf,
+    NgIf
 
   ],
   templateUrl: './flight-ticket-add-modal.component.html',
@@ -60,12 +68,25 @@ export class FlightTicketAddModalComponent {
       seat_number: ['', Validators.required],
       from_date: ['', Validators.required],
       to_date: ['', Validators.required]
-    });
-  }
+
+    }, { validator: this.dateRangeValidator });  }
+
+
 
   close(): void {
     this.dialogRef.close();
   }
+
+  dateRangeValidator(control: AbstractControl): ValidationErrors | null {
+    const fromDate = control.get('from_date')?.value;
+    const toDate = control.get('to_date')?.value;
+
+    if (fromDate && toDate && new Date(toDate) < new Date(fromDate)) {
+      return { dateRangeInvalid: true };
+    }
+    return null;
+  }
+
 
   onAirportChange(event: Event): void {
     const selectedValue = (event.target as HTMLSelectElement).value;
@@ -75,6 +96,7 @@ export class FlightTicketAddModalComponent {
       price: this.initialEconomyPrice
     });
   }
+
 
   onTicketTypeChange(event: Event): void {
     const selectedValue = (event.target as HTMLSelectElement).value;

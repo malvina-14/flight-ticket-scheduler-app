@@ -39,7 +39,11 @@
       <div class="form-group">
         <label for="to_date">To Date</label>
         <input id="to_date" type="datetime-local" class="form-control" formControlName="to_date" required/>
+        <div *ngIf="ticketForm.errors?.['dateRangeInvalid']" class="text-danger">
+          To Date cannot be earlier than From Date!
+        </div>
       </div>
+
       <div class="form-actions">
         <button type="submit" class="btn btn-primary" [disabled]="ticketForm.invalid">Submit</button>
       </div>
