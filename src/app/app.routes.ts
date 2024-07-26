@@ -1,5 +1,11 @@
 import {Routes} from '@angular/router';
 import {AuthGuard} from "./auth/guards/auth.guard";
+import {LoginComponent} from "./auth/features/login/login.component";
+import {SignupComponent} from "./auth/features/signup/signup.component";
+import {MainComponent} from "./pages/features/main/main.component";
+import {FightTicketListComponent} from "./pages/features/fight-ticket-list/fight-ticket-list.component";
+import {ChartDataComponent} from "./pages/features/chart-data/chart-data.component";
+
 
 export const routes: Routes = [
   {
@@ -9,45 +15,30 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () =>
-      import('./auth/features/login/login.component').then(
-        c => c.LoginComponent
-      ),
+    component: LoginComponent,
+
   },
   {
     path: 'sign-up',
-    loadComponent: () =>
-      import('./auth/features/signup/signup.component').then(
-        c => c.SignupComponent
-      ),
+    component: SignupComponent
   },
   {
     path: '',
-    loadComponent: () =>
-      import('./pages/features/main/main.component').then(
-        (c) => c.MainComponent
-      ),
+    component: MainComponent,
     children: [
       {
         path: 'flight-ticket-list',
-        loadComponent: () =>
-          import(
-            './pages/features/fight-ticket-list/fight-ticket-list.component'
-            ).then((c) => c.FightTicketListComponent),
+        component: FightTicketListComponent,
         canActivate: [AuthGuard],
-
       },
       {
         path: 'chart-data',
-        loadComponent: () =>
-          import(
-            './pages/features/chart-data/chart-data.component'
-            ).then((m) => m.ChartDataComponent),
-        canActivate: [AuthGuard],
-
+        component: ChartDataComponent,
+        canActivate: [AuthGuard]
       },
     ],
   },
+
   {
     path: '**',
     redirectTo: 'flight-ticket-list',

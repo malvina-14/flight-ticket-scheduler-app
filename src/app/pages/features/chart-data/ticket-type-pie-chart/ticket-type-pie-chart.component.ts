@@ -7,14 +7,17 @@ import {BaseChartDirective} from "ng2-charts";
   selector: 'app-ticket-type-pie-chart',
   standalone: true,
   imports: [
-    BaseChartDirective
+    BaseChartDirective,
   ],
   templateUrl: './ticket-type-pie-chart.component.html',
   styleUrl: './ticket-type-pie-chart.component.scss'
 })
 export class TicketTypePieChartComponent implements OnInit {
   pieChartLabels: string[] = [];
-  pieChartData: ChartData<'pie'> = { labels: [], datasets: [] };
+  pieChartData: ChartData<'pie', number[], string> = {
+    labels: [],
+    datasets: []
+  };
   pieChartType: ChartType = 'pie';
 
   constructor(private ticketService: TicketService) {}

@@ -36,13 +36,13 @@ export class EarningsLineChartComponent implements OnInit{
         {
           data: Object.values(earningsByDate),
           label: 'Earnings',
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',  // Background color (with transparency)
-          borderColor: 'rgba(54, 162, 235, 1)',  // Line color
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 2,
-          pointBackgroundColor: 'rgba(54, 162, 235, 1)',  // Point color
-          pointBorderColor: '#fff',  // Point border color
-          pointHoverBackgroundColor: '#fff',  // Point hover background color
-          pointHoverBorderColor: 'rgba(54, 162, 235, 1)'  // Point hover border color
+          pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(54, 162, 235, 1)'
         }
       ];
     });

@@ -16,10 +16,11 @@
   justify-content: space-between;
 }
 
-.bg-primary{
-  background: linear-gradient(to right,  #d8363a, #dd3675);
+.bg-primary {
+  background: linear-gradient(to right, #d8363a, #dd3675);
 }
-.btn-danger{
+
+.btn-danger {
   background-color: white !important;
   border: 1px solid #d8363a !important;
   color: #d8363a;
@@ -27,9 +28,11 @@
   font-weight: 500;
   font-size: 15px;
 }
-.details{
+
+.details {
   cursor: pointer;
 }
+
 .input-group-text {
   background-color: #d8363a;
   color: #fff;

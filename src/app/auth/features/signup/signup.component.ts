@@ -55,7 +55,11 @@ export class SignupComponent {
 
       this.authService.signUp(email, password)
         .then(() => {
-          this.snackBar.open('Sign up successful!');
+          this.snackBar.open('You are signed up successfully!', '', {
+            duration: 2000,
+            panelClass: ['success-snackbar'],
+            verticalPosition: 'top'
+          });
           this.router.navigate(['/login']);
         })
         .catch((error: any) => {

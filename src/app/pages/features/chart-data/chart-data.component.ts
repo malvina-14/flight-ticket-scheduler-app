@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Chart, ChartData, ChartType, registerables} from "chart.js";
+import {Component} from '@angular/core';
+import {Chart,  registerables} from "chart.js";
 import {BaseChartDirective} from "ng2-charts";
 import {TicketTypePieChartComponent} from "./ticket-type-pie-chart/ticket-type-pie-chart.component";
 import {EarningsLineChartComponent} from "./earnings-line-chart/earnings-line-chart.component";

@@ -20,7 +20,7 @@ export class TicketService {
       switchMap(isDup => {
         if (isDup) {
           this.snackBar.open('Error adding ticket: Duplicate ticket exists', 'Close', { duration: 3000 });
-          return throwError('Duplicate ticket exists');
+          return throwError('Ticket already exists!');
         } else {
           return from(this.ticketsCollection.add(ticket)).pipe(
             map(() => {
@@ -35,8 +35,7 @@ export class TicketService {
         }
       }),
       catchError(error => {
-        console.error('Error checking for duplicate ticket: ', error);
-        this.snackBar.open('error adding the ticket!', '', {
+        this.snackBar.open('Error adding the ticket!', '', {
           duration: 2000,
           panelClass: ['error-snackbar'],
           verticalPosition: 'top'

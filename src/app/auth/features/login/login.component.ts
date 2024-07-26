@@ -55,16 +55,32 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(email, password)
         .then(() => {
-          this.snackBar.open('You are logged in successfully!', '', {
-            duration: 2000,
-            panelClass: ['success-snackbar'],
-            verticalPosition: 'top'
-          });
-          const user = this.authService.getUser()
-          this.router.navigate(['flight-ticket-list']);
+          const user = this.authService.getUser();
+          if (user) {
+            this.snackBar.open('You are logged in successfully!', '', {
+              duration: 2000,
+              panelClass: ['success-snackbar'],
+              verticalPosition: 'top'
+            });
+            const user = this.authService.getUser()
+
+            this.router.navigate(['flight-ticket-list']);
+          }
         })
         .catch((error: any) => {
-          this.snackBar.open('Login failed. Please try again.', '', {
+          let errorMessage = 'Login failed. Please try again.';
+          // Map Firebase error codes to user-friendly messages
+          if (error.code === 'auth/invalid-credential') {
+            errorMessage = 'There is a problem with your credentials. Please check and try again.';
+          } else if (error.code === 'auth/user-disabled') {
+            errorMessage = 'The user account has been disabled by an administrator.';
+          } else if (error.code === 'auth/user-not-found') {
+            errorMessage = 'There is no user record corresponding to this identifier. The user may have been deleted.';
+          } else if (error.code === 'auth/wrong-password') {
+            errorMessage = 'The password is invalid or the user does not have a password.';
+          }
+
+          this.snackBar.open(errorMessage, '', {
             duration: 2000,
             panelClass: ['error-snackbar'],
             verticalPosition: 'top'
@@ -72,6 +88,7 @@ export class LoginComponent implements OnInit {
         });
     }
   }
+
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
