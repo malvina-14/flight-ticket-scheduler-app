@@ -1,16 +1,13 @@
 import {Component} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
   Validators
 } from "@angular/forms";
 import {Router, RouterLink} from "@angular/router";
-import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../../services/auth.service";
 
 @Component({
