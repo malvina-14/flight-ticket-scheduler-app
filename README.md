@@ -10,7 +10,7 @@ Features:
   3. Search functionality across all ticket fields
   4. Admin-only ticket addition with UUID generation for ticket IDs
   5. Charts for ticket earnings and ticket types
-  6. Styling with MDB library and Angular Material
+  6. Styling with Bootstrap, MDB library and Angular Material
   7. Backend communication with Firebase
   8. Chart visualization using ng2-chart library
 
