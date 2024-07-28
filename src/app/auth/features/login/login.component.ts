@@ -62,8 +62,6 @@ export class LoginComponent implements OnInit {
               panelClass: ['success-snackbar'],
               verticalPosition: 'top'
             });
-            const user = this.authService.getUser()
-
             this.router.navigate(['flight-ticket-list']);
           }
         })

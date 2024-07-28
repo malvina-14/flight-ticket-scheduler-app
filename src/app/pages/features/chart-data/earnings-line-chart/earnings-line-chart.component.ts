@@ -28,8 +28,9 @@ export class EarningsLineChartComponent implements OnInit{
 
       data.forEach(ticket => {
         const date = new Date(ticket.from_date).toLocaleDateString('en-US');
-        earningsByDate[date] = (earningsByDate[date] || 0) + ticket.price;
-      });
+        const roundedPrice = Math.round(ticket.price);
+        earningsByDate[date] = (earningsByDate[date] || 0) + roundedPrice;
+      })
 
       this.lineChartLabels = Object.keys(earningsByDate);
       this.lineChartData = [

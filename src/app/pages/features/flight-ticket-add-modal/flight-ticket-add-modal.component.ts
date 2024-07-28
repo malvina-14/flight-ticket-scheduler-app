@@ -87,15 +87,13 @@ export class FlightTicketAddModalComponent {
     return null;
   }
 
-
-  onAirportChange(event: Event): void {
+  onAirportChange(event: Event){
     this.initialEconomyPrice = Math.floor(Math.random() * 51) + 50 // Generates a random price between 50 and 100
     this.ticketForm.patchValue({
-      price: this.initialEconomyPrice
+      price: this.initialEconomyPrice,
+      ticket_type: 'Economy'
     });
-  }
-
-
+}
 
   onTicketTypeChange(event: Event): void {
     const selectedValue = (event.target as HTMLSelectElement).value;

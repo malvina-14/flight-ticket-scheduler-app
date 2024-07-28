@@ -8,7 +8,7 @@
 
       <div class="form-group">
         <label for="inbound">From</label>
-        <select id="inbound" class="form-control" formControlName="inbound" required>
+        <select id="inbound" class="form-control" formControlName="inbound" required (change)="onAirportChange($event)">
           <option *ngFor="let airport of airports" [value]="airport.code">{{ airport.name }}</option>
         </select>
       </div>
